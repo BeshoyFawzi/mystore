@@ -1,0 +1,10 @@
+.secondNav{
+    background-color: rgba(0, 0, 0, 0.81);
+    font-family:'Cairo', sans-serif;
+    display:none
+}
+@media only screen and (max-width: 991px) {
+    .secondNav{
+        display:block !important
+    }
+  }

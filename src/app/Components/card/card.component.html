@@ -1,0 +1,23 @@
+<div class="container mt-5" *ngIf="prodDet.uid">
+    <div class="row">
+        <div class="col-6 col-sx-6  col-sm-6 col-md-6">
+            <img class="img-fluid w-75 h-75" [src]="prodDet.img">
+        </div>
+        <div class="col-6 col-sx-6  col-sm-6 col-md-6 d-flex flex-column">
+            <p class="text-danger mb-2">{{prodDet.title}}</p>
+            <p class="mb-2">{{prodDet.description}}</p>
+            <div class="mt-2 d-flex justify-content-between">
+            <button type="button" class="btn btn-danger" (click)="Delete()">Delete</button>
+            <button type="button" class="btn btn-primary " (click)="Submit()">Submit</button>
+          </div>
+        </div>
+    </div>
+    
+    </div>
+      <div class="alert alert-success uk-position-center" role="alert" *ngIf="addmassge">
+        {{addmassge}}
+        
+      </div>
+      <div class="alert alert-danger uk-position-center" role="alert" *ngIf="deletemassge">
+        {{deletemassge}}
+      </div>

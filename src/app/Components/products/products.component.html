@@ -1,0 +1,15 @@
+<div class="row gy-3">
+  <p class="text-center fs-1 mt-5 p-3">All products</p>
+  <div class="col-12 col-sx-12  col-sm-6 col-md-3 d-flex justify-content-center align-items-center"
+   *ngFor="let item of dataArray">
+    <div class="card" style="width: 18rem;">
+      <img [src]="item.img" class="card-img-top img-fluid"
+        style="height:200px ; width:100%">
+      <div class="card-body">
+        <h5 class="card-title fw-bold" style="height:3rem;overflow:hidden">{{item.title}}</h5>
+        <p class="card-text" style="height:10rem;overflow:hidden">{{item.description}}</p>
+        <a  class="btn btn-primary"(click)="detail(item.id)">Details</a>
+      </div>
+    </div>
+  </div>
+</div>

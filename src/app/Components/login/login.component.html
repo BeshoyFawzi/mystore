@@ -1,0 +1,38 @@
+<!-- uk-position-center uk-overlay uk-overlay-default -->
+<!-- d-flex justify-content-center align-items-center -->
+<div class="row loginf ">
+    <div class="col-12 col-sx-12  col-sm-12 col-md-12">
+        <img class="img-fluid text-center" src="../../../assets/img/undraw_login_re_4vu2.svg">
+        <div class="alert alert-danger uk-position-top-right" role="alert"style="margin-top: 70px;" 
+        *ngIf="messageError">{{messageError}}</div>
+        <!------------------------------form---------------------------------------->
+        <form #logform="ngForm" (ngSubmit)="login(logform)"  
+        class="shadow-lg p-5 mb-5 bg-body rounded  uk-position-center uk-overlay uk-overlay-default"
+            style="background-color:rgba(200, 200, 219, 0.85)!important">
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: user"></span>
+                    <input class="uk-input" type="email" placeholder="Email" name="email" #email="ngModel" ngModel required>
+                    <div class="alert alert-danger" role="alert" 
+                    *ngIf="email.errors?.required && email.touched">required!</div>
+                    <div class="alert alert-danger" role="alert" *ngIf="email.errors?.email && email.touched"> 
+                        This email is incorrect</div>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                    <input class="uk-input" type="password" placeholder="Password" name="password" #password="ngModel" ngModel required minlength="8">
+                    <div class="alert alert-danger" role="alert" *ngIf="password.errors?.required && password.touched">required</div>
+                    <div class="alert alert-danger" role="alert" *ngIf="password.errors?.minlength && password.touched">More than 8</div>
+                </div>
+            </div>
+            <div class="mt-3 d-flex flex-column">
+                <button type="submit" class="bt-log btn btn-primary" [disabled]="logform.invalid">login</button>
+                <a class="align-self-center mt-3" href="#">Forget password ?</a>
+            </div>
+        </form>
+
+    </div>
+</div>

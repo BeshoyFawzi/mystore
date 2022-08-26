@@ -1,0 +1,127 @@
+<div class="row gy-3">
+  <p class="text-center fs-1 mt-5 p-3">My products</p>
+  <div class="col-12 col-sx-12  col-sm-12 col-md-12 mb-3">
+    <button type="button" class="btn btn-outline-primary float-end me-4" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+      Add product
+    </button>
+  </div>
+  <!-- *ngIf="Uid===item.uid" -->
+  <div style="clear: both;"></div>
+  <div class="col-12 col-sx-12 col-sm-6 col-md-3 d-flex justify-content-center align-items-center"
+   *ngFor="let item of dataArray" >
+    <div class="card" style="width: 18rem;" *ngIf="Uid===item.uid" #prodcard>
+      <div class="uk-position-relative">
+      <img [src]="item.img" class="card-img-top img-fluid text-center"
+        style="height:200px ; width:100%">
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"
+        data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="getIdPic(item.id)"
+        class="text-primary uk-position-absolute uk-position-small uk-position-bottom-right">
+        <span uk-icon="file-edit" class="text-light"></span>
+    </button>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title fw-bold"   style="height:3rem;overflow:hidden">{{item.title}}</h5>
+        <p class="card-text" style="height:10rem;overflow:hidden">{{item.description}}</p>
+        <button mat-fab color="warn"  aria-label="Example icon button with a delete icon"
+         (click)="delete(item.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-fab color="primary" class="ms-5" aria-label="Example icon button with a menu icon"
+        data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="update(item.id)">
+            <span uk-icon="file-edit" class="text-light"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- Modal ----------------------------------------------------------------------------------------------->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edti Information</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form>
+          <div class="mb-3">
+              <input type="text" class="form-control" placeholder="UserName" name="title"
+              [(ngModel)]="dataup.title">
+          </div>
+          <div class="mb-3">
+              <textarea class="form-control" placeholder="description" rows="3" name="description"
+              [(ngModel)]="dataup.description"></textarea>
+          </div>
+          <!-- <div class="alert alert-success" role="alert" *ngIf="infoDone">{{infoDone}}</div> -->
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" (click)="UpdateInf()">Update</button>
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update img</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="mb-3">
+                      <label for="formFile" class="form-label">Upload image</label>
+                      <input class="form-control" type="file" id="formFile" 
+                       (change)="uploadImg($event,dataArray.id)">
+                  </div>
+              <div *ngIf="percentage | async as pc">
+                  <div class="alert alert-success" role="alert" *ngIf="pc==100" >done</div>
+              </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+              </form>
+          </div>
+
+      </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- --------------------------------------------- -->
+        <form #prod="ngForm" (ngSubmit)="addpro(prod)">
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="title" name="title" #title="ngModel" ngModel>
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" placeholder="description" rows="3"
+            name="description" #description="ngModel" ngModel></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Upload image</label>
+            <input class="form-control" type="file" id="formFile" 
+             (change)="uploadImg2($event)">
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add product</button>
+         </div>
+        </form>
+        <div class="mb-3 alert alert-success" *ngIf="addmassge">{{addmassge}}</div>
+        <!-- ------------------------------------------------->
+      </div>
+      
+    </div>
+  </div>
+</div>

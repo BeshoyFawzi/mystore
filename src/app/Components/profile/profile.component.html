@@ -1,0 +1,139 @@
+<div class="row containerProfil">
+    <div class="col-12 col-sx-12  col-sm-12 col-md-12  w-100  uk-position-relative">
+        <img class="img-fluid  w-100 coverProgile" [src]="dataprofile.cover"
+            style="height: 450px;background-size: cover; background-repeat: no-repeat">
+        <!-- <span uk-icon="file-edit"  data-bs-toggle="modal" data-bs-target="#exampleModal3"
+        class="btn text-primary uk-position-absolute uk-position-small uk-position-top-right"></span> -->
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" data-bs-toggle="modal"
+            data-bs-target="#exampleModal3"
+            class="text-primary uk-position-absolute uk-position-small uk-position-center-left ms-3">
+            <span uk-icon="file-edit" class="text-light"></span>
+        </button>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------- -->
+    <div class="col-12 col-sx-12 col-sm-12 col-md-12 imgProfil">
+        <div class="row">
+            <!-- ---------------------------------------------------------------------------------------- -->
+            <div class="col-12 col-sx-12 col-sm-12 col-md-6 d-flex flex-row imgf ">
+                <div class="uk-position-relative"> <img class="img-fluid rounded" [src]="dataprofile.img"
+                        style="height:200px;width:200px">
+                    <!-- <span uk-icon="file-edit"  data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                    class="btn text-primary uk-position-absolute uk-position-small uk-position-bottom-right"></span> -->
+
+                    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                        class="text-primary uk-position-absolute uk-position-small uk-position-bottom-right">
+                        <span uk-icon="file-edit" class="text-light"></span>
+                    </button>
+                </div>
+                <div class="text  d-flex flex-column justify-content-center ms-3">
+                    <p class="text-dark ms-2">{{dataprofile.userName}}</p>
+                    <p class="text-dark ms-2">{{dataprofile.email}}</p>
+                    <button type="button" class="btn btn btn-outline-secondary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        <span uk-icon="file-edit">Update Profile</span>
+                    </button>
+                </div>
+            </div>
+            <!-- ------------------------------------------------------------ -->
+            <div class=" col-12 col-sx-12 col-sm-12 col-md-6 description  mt-2">
+                <p class="fs-3 "> DESCRIPTION</p>
+                <P>{{dataprofile.description}}</P>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="UserName" name="userName"
+                            [(ngModel)]="dataprofile.userName">
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" placeholder="description" rows="3" name="description"
+                            [(ngModel)]="dataprofile.description"></textarea>
+                    </div>
+                    <div class="alert alert-success" role="alert" *ngIf="infoDone">{{infoDone}}</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" (click)="UpdateInf()">Update</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update img</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Upload image</label>
+                        <input class="form-control" type="file" id="formFile" 
+                         (change)="uploadImg($event)">
+                    </div>
+                <div *ngIf="percentage | async as pc">
+                    <div class="alert alert-success" role="alert" *ngIf="pc==100" >done</div>
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal3 -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update cover</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Default file input example</label>
+                        <input class="form-control" type="file" id="formFile" accept=".jpg,.png"
+                            (change)="uploadcover($event)">
+                    </div>
+                    <div *ngIf="percentage | async as pc">
+                        <div class="alert alert-success" role="alert" *ngIf="pc==100" >done</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<pre>
+
+
+
+
+
+
+
+
+
+</pre>
